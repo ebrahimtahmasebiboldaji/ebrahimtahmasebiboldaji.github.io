@@ -349,6 +349,59 @@
   .card:hover{ border-color:var(--blue-soft); transform:translateY(-2px); }
   .card .icon{ width:46px; height:46px; margin-bottom:14px; }
   .card .icon svg{ width:100%; height:100%; }
+
+  .card .figure{
+    margin:0 0 14px;
+    border:1px solid var(--paper-line);
+    background:#0d1a22;
+    overflow:hidden;
+    aspect-ratio:16/10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .card .figure img{
+    width:100%; height:100%;
+    object-fit:contain;
+    display:block;
+    transition:transform .35s ease;
+  }
+  .card:hover .figure img{ transform:scale(1.03); }
+
+  .card .watch{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--blue);
+    margin-top:4px;
+  }
+  .card .watch::before{
+    content:"▶";
+    font-size:9px;
+  }
+
+  .video-block{
+    margin:0 0 12px;
+    border:1px solid var(--paper-line);
+    background:#0d1a22;
+  }
+  .video-block video{
+    width:100%;
+    display:block;
+    aspect-ratio:16/10;
+    background:#0d1a22;
+  }
+  .video-block .video-caption{
+    display:block;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding:7px 10px;
+    border-top:1px solid var(--paper-line);
+    background:var(--paper);
+  }
   .card h3{ margin:0 0 4px; font-size:1.05rem; }
   .card .tag{
     font-family:var(--mono);
@@ -627,78 +680,90 @@
     <div class="projects">
 
       <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#005B8C" stroke-width="1.6">
-            <path d="M6 30 Q24 40 42 30" stroke-linecap="round"/>
-            <path d="M9 30 L11 18 Q24 12 37 18 L39 30" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="24" y1="12" x2="24" y2="6"/>
-            <line x1="18" y1="8" x2="30" y2="8"/>
-          </svg>
-        </div>
-        <span class="tag">Ship Design</span>
-        <h3>Explorer Yacht — Full Concept Design</h3>
-        <ul>
-          <li>Complete concept cycle: market research, mission/route definition, general arrangement, weight optimisation</li>
-          <li>Hydrostatics, first-generation intact stability (IS-code), floodable length calculations</li>
-          <li>Resistance prediction, seakeeping estimation, propulsion selection, and a final 3D rendered concept model</li>
-        </ul>
-        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: Maxsurf, Rhino, SolidWorks</em></div>
-      </div>
-
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#005B8C" stroke-width="1.6">
-            <path d="M4 24 Q12 14 20 24 T36 24" stroke-linecap="round"/>
-            <path d="M4 32 Q12 24 20 32 T36 32" stroke-linecap="round" opacity="0.55"/>
-            <rect x="30" y="10" width="14" height="10" rx="1"/>
-          </svg>
-        </div>
-        <span class="tag">CFD · Hydrodynamics</span>
-        <h3>CFD Resistance Analysis — Container Ship Hull with Roughness</h3>
-        <ul>
-          <li>RANS CFD simulations predicting hull drag at design speed, including surface-roughness drag increment</li>
-          <li>Mesh generation via snappyHexMesh / cfMesh; k–ω SST turbulence; free-surface VOF modelling</li>
-          <li>Post-processed pressure and viscous drag components; validated against ITTC resistance methods</li>
-        </ul>
-        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: OpenFOAM, STAR-CCM+</em></div>
-      </div>
-
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#005B8C" stroke-width="1.6">
-            <circle cx="24" cy="24" r="4"/>
-            <path d="M24 20 C 20 10, 10 10, 8 16 C 14 18, 20 20, 24 20" stroke-linejoin="round"/>
-            <path d="M24 28 C 28 38, 38 38, 40 32 C 34 30, 28 28, 24 28" stroke-linejoin="round"/>
-            <path d="M28 24 C 38 20, 38 10, 32 8 C 30 14, 28 20, 28 24" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="figure"><img src="img/ml-thesis.jpg" alt="CVAE architecture diagram, mesh refinement zones, and propeller velocity field reconstruction accuracy plots" loading="lazy"></div>
         <span class="tag">Machine Learning · CFD</span>
-        <h3>ML Surrogate Integration — Voith Propeller Flow Fields</h3>
+        <h3>M.Sc. Thesis — ML Surrogate Models for Ship Propulsion</h3>
         <ul>
-          <li>Three CVAE-based surrogate models reconstructing velocity fields from high-fidelity CFD data</li>
-          <li>Integrated into the in-house RANS solver FreSCo+ for fast, propeller-aware hull drag prediction</li>
-          <li>Automated Python pipelines for simulation, data extraction, training, and validation</li>
+          <li>Built CVAE surrogates reconstructing full velocity fields around a Voith Schneider propeller from a limited set of CFD snapshots</li>
+          <li>Coupled the trained model to an in-house RANS solver, replacing the resolved propeller with a learned body-force field</li>
+          <li>Assessed accuracy and speed-up against the fully resolved simulation</li>
         </ul>
         <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: FreSCo+, Python, PyTorch</em></div>
       </div>
 
       <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#005B8C" stroke-width="1.6">
-            <rect x="8" y="8" width="32" height="32" rx="1"/>
-            <line x1="8" y1="18" x2="40" y2="18"/>
-            <line x1="16" y1="18" x2="16" y2="40"/>
-            <line x1="26" y1="8" x2="26" y2="40" opacity="0.5"/>
-          </svg>
+        <div class="video-block">
+          <video controls preload="none" poster="img/planing-hull.jpg" playsinline>
+            <source src="video/planing-hull-calm.mp4" type="video/mp4">
+            Your browser doesn't support inline video. <a href="video/planing-hull-calm.mp4">Download the video</a>.
+          </video>
+          <span class="video-caption">Calm water simulation</span>
         </div>
-        <span class="tag">Structures</span>
-        <h3>Solid Solver Development from First Principles</h3>
+        <div class="video-block">
+          <video controls preload="none" poster="img/planing-hull.jpg" playsinline>
+            <source src="video/planing-hull-waves.mp4" type="video/mp4">
+            Your browser doesn't support inline video. <a href="video/planing-hull-waves.mp4">Download the video</a>.
+          </video>
+          <span class="video-caption">High-speed craft in waves</span>
+        </div>
+        <span class="tag">CFD · Hydrodynamics</span>
+        <h3>Hydrodynamic Simulation of Planing Hull using OpenFOAM</h3>
         <ul>
-          <li>Custom FVM, FDM, SPH and LBM solvers implemented in C++/Python for free-surface and multiphase problems</li>
-          <li>Coupled STAR-CCM+/ABAQUS framework for fluid–structure interaction; inverse FEM for structural health monitoring</li>
-          <li>Systematic verification through convergence studies against analytical and benchmark solutions</li>
+          <li>Free-surface RANS simulation of a planing hull in calm water and in waves, tracking pressure distribution and running trim</li>
+          <li>Post-processed wave elevation and hull-pressure fields across the full time series</li>
         </ul>
-        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: C++, MATLAB, ABAQUS</em></div>
+      </div>
+
+      <div class="card">
+        <div class="video-block">
+          <video controls preload="none" poster="img/fsi-hronturek.jpg" playsinline>
+            <source src="video/fsi-simulation.mp4" type="video/mp4">
+            Your browser doesn't support inline video. <a href="video/fsi-simulation.mp4">Download the video</a>.
+          </video>
+          <span class="video-caption">FSI simulation</span>
+        </div>
+        <span class="tag">FSI · Solver Development</span>
+        <h3>Hron–Turek Benchmark — Turbulent Free-Surface FSI</h3>
+        <ul>
+          <li>Extended the Hron–Turek benchmark from a simple laminar single-phase case to turbulent free-surface flow</li>
+          <li>Built on solid4Foam, an OpenFOAM library for solid mechanics and fluid–structure interaction</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="figure"><img src="img/explorer-yacht.jpg" alt="Explorer yacht RAO curves, hull renders, resistance power curve, and wave pattern simulation" loading="lazy"></div>
+        <span class="tag">Ship Design</span>
+        <h3>Explorer Yacht — Full Concept Design</h3>
+        <ul>
+          <li>Complete concept cycle: market research, database regression, mission definition, general arrangement, weight optimisation</li>
+          <li>Hydrostatics, first-generation intact stability (IS-Code), and floodable length calculations</li>
+          <li>Resistance prediction, seakeeping natural periods, machinery selection, and a final rendered 3D model</li>
+        </ul>
+        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: Maxsurf, Rhino, SolidWorks</em></div>
+      </div>
+
+      <div class="card">
+        <div class="figure"><img src="img/kcs-roughness.jpg" alt="KCS hull mesh, pressure field, and drag force convergence plots for roughness resistance study" loading="lazy"></div>
+        <span class="tag">CFD · Hydrodynamics</span>
+        <h3>CFD Simulation — Roughness Effect on KCS Resistance</h3>
+        <ul>
+          <li>RANS simulations of hull resistance at design speed with free-surface capture (VOF)</li>
+          <li>Structured mesh generation and k–ω SST turbulence modelling</li>
+          <li>Pressure and viscous drag components validated against ITTC resistance estimation</li>
+        </ul>
+        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: OpenFOAM</em></div>
+      </div>
+
+      <div class="card">
+        <div class="figure"><img src="img/ice-class.jpg" alt="Ice thickness versus velocity chart and icebreaker vessel in ice field" loading="lazy"></div>
+        <span class="tag">Arctic Technology</span>
+        <h3>Ice-Class Vessel Operation — Baltic Sea Study</h3>
+        <ul>
+          <li>Ice-class selection for a year-round Hamburg–Helsinki–Tallinn feeder service, comparing FSICR IC and IA Super</li>
+          <li>POLARIS Risk Index Outcome assessment using FMI/SMHI ice charts, with sensitivity to severe first-year ice</li>
+          <li>Weekly voyage simulation over a full winter, coupling analytical ice resistance with net thrust intersection</li>
+        </ul>
+        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: Python, MATLAB, POLARIS framework</em></div>
       </div>
 
     </div>
