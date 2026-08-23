@@ -123,11 +123,22 @@
     padding:64px 28px 40px;
     overflow:hidden;
   }
+  /* CHANGED: hero-inner is now a two-column flex row — text on the left,
+     portrait photo on the right — instead of a single stacked column. */
   .hero-inner{
     max-width:1040px;
     margin:0 auto;
     position:relative;
     z-index:2;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:44px;
+    flex-wrap:wrap;
+  }
+  .hero-content{
+    flex:1 1 480px;
+    min-width:280px;
   }
   .hull-art{
     position:absolute;
@@ -157,6 +168,44 @@
     .hull-art path{ animation:none; stroke-dashoffset:0; }
   }
   @media (max-width:780px){ .hull-art{ opacity:0.35; width:420px; right:-120px; } }
+
+  /* CHANGED: hero photo — larger portrait-format headshot, sitting beside the
+     name in its own column, styled with the same double-border "drafting"
+     treatment used elsewhere on the page, plus a small mono caption underneath. */
+  .hero-photo-wrap{
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-photo{
+    width:230px;
+    height:280px;
+    border:1px solid var(--paper-line);
+    outline:1px solid var(--blue-soft);
+    outline-offset:6px;
+    overflow:hidden;
+    background:var(--blue-wash);
+  }
+  .hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:grayscale(15%);
+  }
+  .hero-photo-cap{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  @media (max-width:780px){
+    .hero-inner{ flex-direction:column-reverse; }
+    .hero-photo{ width:160px; height:190px; }
+  }
 
   .hero h1{
     font-family:var(--display);
@@ -503,22 +552,36 @@
   </svg>
 
   <div class="hero-inner">
-    <p class="eyebrow">Sheet 00 — General Arrangement</p>
-    <h1>Ebrahim Tahmasebi&nbsp;Boldaji</h1>
-    <p class="role">Naval Architect &amp; CFD Engineer</p>
-    <p class="lede">Working across ship hydrodynamics, high-fidelity CFD, and machine-learning surrogate models — from solver development to hull design and structural inspection.</p>
+    <!-- CHANGED: all the text content now lives in .hero-content, the left
+         column of the new two-column hero layout. -->
+    <div class="hero-content">
+      <p class="eyebrow">Sheet 00 — General Arrangement</p>
+      <h1>Ebrahim Tahmasebi&nbsp;Boldaji</h1>
+      <p class="role">Naval Architect &amp; CFD Engineer</p>
+      <p class="lede">Working across ship hydrodynamics, high-fidelity CFD, and machine-learning surrogate models — from solver development to hull design and structural inspection.</p>
 
-    <div class="titleblock">
-      <div><span class="k">Discipline</span><span class="v">Naval Architecture / CFD</span></div>
-      <div><span class="k">Location</span><span class="v">Hamburg, Germany</span></div>
-      <div><span class="k">Email</span><span class="v"><a href="mailto:ebrahim22thmb@gmail.com">ebrahim22thmb@gmail.com</a></span></div>
-      <div><span class="k">Phone</span><span class="v">+49 170 668 5969</span></div>
+      <div class="titleblock">
+        <div><span class="k">Discipline</span><span class="v">Naval Architecture / CFD</span></div>
+        <div><span class="k">Location</span><span class="v">Hamburg, Germany</span></div>
+        <div><span class="k">Email</span><span class="v"><a href="mailto:ebrahim22thmb@gmail.com">ebrahim22thmb@gmail.com</a></span></div>
+        <div><span class="k">Phone</span><span class="v">+49 170 668 5969</span></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn primary" href="CV_Ebrahim_Tahmasebi_Boldaji.pdf" download>Download CV ↓</a>
+        <a class="btn" href="https://www.linkedin.com/in/ebrahim-tahmasebi-boldaji-520b24154/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
     </div>
 
-    <div class="cta-row">
-      <a class="btn primary" href="CV_Ebrahim_Tahmasebi_Boldaji.pdf" download>Download CV ↓</a>
-      <a class="btn" href="https://www.linkedin.com/in/ebrahim-tahmasebi-boldaji-520b24154/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn" href="#contact">Get in touch</a>
+    <!-- CHANGED: headshot moved beside the name and enlarged, with a small
+         mono caption underneath. Replace img/profile.jpg with your actual
+         photo file saved in an "img" folder next to this file. -->
+    <div class="hero-photo-wrap">
+      <div class="hero-photo">
+        <img src="img/profile.jpg" alt="Ebrahim Tahmasebi Boldaji">
+      </div>
+      <span class="hero-photo-cap">Fig. 00 — Portrait</span>
     </div>
   </div>
 </section>
@@ -549,8 +612,12 @@
         <p>Surrogate models for CFD — CVAE, POD/ROM, GNN, PINNs — with training pipelines built for integration into production solvers.</p>
       </div>
       <div class="cell">
-        <h3>Domain &amp; Tools</h3>
-        <p>Ship design, hydrostatics, intact stability, classification rules (SOLAS, MARPOL, FSICR, CRS) · Python, C++, MATLAB, Linux, HPC clusters.</p>
+        <h3>Domain </h3>
+        <p>Ship design, hydrostatics, intact stability, classification rules (SOLAS, MARPOL, FSICR, CRS).</p>
+      </div>
+      <div class="cell">
+        <h3>Tools</h3>
+        <p>Python, C++, MATLAB, Linux, HPC clusters.</p>
       </div>
     </div>
   </div>
@@ -640,7 +707,7 @@
         <h3>Erasmus Mundus Joint Master — Sustainable Ship and Shipping 4.0</h3>
         <div class="org">TU Hamburg (DE) · University of A Coruña (ES) · University of Naples Federico II (IT) — Grade 109/110</div>
         <ul>
-          <li><strong>Thesis</strong>: Machine-Learning Assisted Field Surrogate Models of Complex Ship Propulsion Systems in Hydrodynamic Numerical Simulations</li>
+          <li><strong>Thesis</strong>: Machine-Learning Assisted Field Surrogate Models of Complex Ship Propulsion Systems in Hydrodynamic Numerical Simulations — <a href="https://canva.link/6ampqu80kx97pyh" target="_blank" rel="noopener">slides</a></li>
         </ul>
       </div>
     </div>
@@ -688,7 +755,8 @@
           <li>Coupled the trained model to an in-house RANS solver, replacing the resolved propeller with a learned body-force field</li>
           <li>Assessed accuracy and speed-up against the fully resolved simulation</li>
         </ul>
-        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: FreSCo+, Python, PyTorch</em></div>
+        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: FreSCo+, Python, PyTorch,  <a href="https://canva.link/6ampqu80kx97pyh" target="_blank" rel="noopener">slides</a>
+</em></div>
       </div>
 
       <div class="card">
