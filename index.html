@@ -123,8 +123,6 @@
     padding:64px 28px 40px;
     overflow:hidden;
   }
-  /* CHANGED: hero-inner is now a two-column flex row — text on the left,
-     portrait photo on the right — instead of a single stacked column. */
   .hero-inner{
     max-width:1040px;
     margin:0 auto;
@@ -169,9 +167,6 @@
   }
   @media (max-width:780px){ .hull-art{ opacity:0.35; width:420px; right:-120px; } }
 
-  /* CHANGED: hero photo — larger portrait-format headshot, sitting beside the
-     name in its own column, styled with the same double-border "drafting"
-     treatment used elsewhere on the page, plus a small mono caption underneath. */
   .hero-photo-wrap{
     flex:0 0 auto;
     display:flex;
@@ -230,7 +225,6 @@
     margin:0 0 30px;
   }
 
-  /* title-block style meta strip, echoing a real drawing title block */
   .titleblock{
     display:flex;
     flex-wrap:wrap;
@@ -552,8 +546,6 @@
   </svg>
 
   <div class="hero-inner">
-    <!-- CHANGED: all the text content now lives in .hero-content, the left
-         column of the new two-column hero layout. -->
     <div class="hero-content">
       <p class="eyebrow">Sheet 00 — General Arrangement</p>
       <h1>Ebrahim Tahmasebi&nbsp;Boldaji</h1>
@@ -574,9 +566,6 @@
       </div>
     </div>
 
-    <!-- CHANGED: headshot moved beside the name and enlarged, with a small
-         mono caption underneath. Replace img/profile.jpg with your actual
-         photo file saved in an "img" folder next to this file. -->
     <div class="hero-photo-wrap">
       <div class="hero-photo">
         <img src="img/profile.jpg" alt="Ebrahim Tahmasebi Boldaji">
@@ -746,6 +735,31 @@
 
     <div class="projects">
 
+      <!-- NEW: High-speed craft simulation — suppressing numerical ventilation.
+           Video file expected at video/High-speed-craft.mp4 (already uploaded per your note).
+           No poster image supplied yet, so preload="metadata" is used instead of a poster —
+           the browser will pull a frame from the video itself as the thumbnail.
+           Bullets below are a first draft based on your one-line description — please check
+           the wording matches what you actually did before publishing, especially any
+           specific numbers or method names. -->
+      <div class="card">
+        <div class="video-block">
+          <video controls preload="metadata" playsinline>
+            <source src="video/High-speed-craft.mp4" type="video/mp4">
+            Your browser doesn't support inline video. <a href="video/High-speed-craft.mp4">Download the video</a>.
+          </video>
+          <span class="video-caption">High-speed craft — free-surface simulation</span>
+        </div>
+        <span class="tag">CFD · Numerical Methods</span>
+        <h3>High-Speed Craft Simulation — Suppressing Numerical Ventilation</h3>
+        <ul>
+          <li>Simulated free-surface flow around a high-speed craft hull, where standard VOF settings produced spurious numerical ventilation (non-physical air entrainment) at the spray root and transom</li>
+          <li>Diagnosed the cause in the interface-capturing scheme and local mesh resolution, and adjusted discretisation and refinement to suppress the artefact</li>
+          <li>Recovered a stable, physically consistent free-surface solution consistent with expected planing behaviour</li>
+        </ul>
+        <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: OpenFOAM</em></div>
+      </div>
+
       <div class="card">
         <div class="figure"><img src="img/ml-thesis.jpg" alt="CVAE architecture diagram, mesh refinement zones, and propeller velocity field reconstruction accuracy plots" loading="lazy"></div>
         <span class="tag">Machine Learning · CFD</span>
@@ -834,8 +848,6 @@
         <div class="link-row"><em style="color:var(--ink-soft); font-family:var(--mono); font-size:12.5px;">Tools: Python, MATLAB, POLARIS framework</em></div>
       </div>
 
-      <!-- CHANGED: new project card — container ship structural scantling design.
-           Save your image as img/container-ship-scantling.jpg -->
       <div class="card">
         <div class="figure"><img src="img/container-ship-scantling.jpg" alt="Container ship midship section drawing showing scantling plate thicknesses and stiffener layout" loading="lazy"></div>
         <span class="tag">Structural Design</span>
